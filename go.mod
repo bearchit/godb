@@ -1,4 +1,4 @@
-module godb
+module github.com/bearchit/godb
 
 require (
 	cloud.google.com/go v0.34.0 // indirect
