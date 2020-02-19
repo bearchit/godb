@@ -2,7 +2,6 @@ package godb
 
 import (
 	"fmt"
-	"log"
 	"strings"
 
 	"github.com/go-sql-driver/mysql"
@@ -55,7 +54,6 @@ func OpenGORM(configurer Configurer) (*gorm.DB, error) {
 		return nil, err
 	}
 
-	log.Printf("%s, %s", configurer.Driver(), configurer.FormatDSN())
 	db, err := gorm.Open(configurer.Driver(), configurer.FormatDSN())
 	if err != nil {
 		return nil, err
