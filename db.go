@@ -64,10 +64,11 @@ func OpenGORM(configurer Configurer) (*gorm.DB, error) {
 }
 
 type MySQLConfig struct {
-	Addr     string `validate:"required"`
-	DbName   string `validate:"required"`
-	User     string `validate:"required"`
-	Password string `validate:"required"`
+	Addr      string `validate:"required"`
+	DbName    string `validate:"required"`
+	User      string `validate:"required"`
+	Password  string `validate:"required"`
+	ParseTime bool   `default:"true"`
 }
 
 func (c MySQLConfig) Driver() string {
@@ -80,5 +81,6 @@ func (c MySQLConfig) FormatDSN() string {
 	mc.DBName = c.DbName
 	mc.User = c.User
 	mc.Passwd = c.Password
+	mc.ParseTime = c.ParseTime
 	return mc.FormatDSN()
 }
