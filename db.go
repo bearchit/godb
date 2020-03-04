@@ -64,6 +64,7 @@ func OpenGORM(configurer Configurer) (*gorm.DB, error) {
 }
 
 type MySQLConfig struct {
+	Net       string `default:"tcp" validate:"required"`
 	Addr      string `validate:"required"`
 	DbName    string `validate:"required"`
 	User      string `validate:"required"`
@@ -77,6 +78,7 @@ func (c MySQLConfig) Driver() string {
 
 func (c MySQLConfig) FormatDSN() string {
 	mc := mysql.NewConfig()
+	mc.Net = c.Net
 	mc.Addr = c.Addr
 	mc.DBName = c.DbName
 	mc.User = c.User
