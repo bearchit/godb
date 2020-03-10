@@ -3,6 +3,7 @@ package godb
 import (
 	"fmt"
 	"strings"
+	"time"
 
 	"github.com/go-sql-driver/mysql"
 	_ "github.com/jinzhu/gorm/dialects/postgres"
@@ -70,6 +71,7 @@ type MySQLConfig struct {
 	User      string `validate:"required"`
 	Password  string `validate:"required"`
 	ParseTime bool   `default:"true"`
+	Loc       *time.Location
 }
 
 func (c MySQLConfig) Driver() string {
@@ -84,5 +86,9 @@ func (c MySQLConfig) FormatDSN() string {
 	mc.User = c.User
 	mc.Passwd = c.Password
 	mc.ParseTime = c.ParseTime
+
+	if c.Loc != nil {
+		mc.Loc = c.Loc
+	}
 	return mc.FormatDSN()
 }
